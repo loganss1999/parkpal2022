@@ -14,16 +14,17 @@ var (
  rdb *redis.Client
 )
 var clients = make(map[*websocket.Conn]bool)
-var broadcaster = make(chan ChatMessage)
+var broadcaster = make(chan ParkingSpace)
 var upgrader = websocket.Upgrader {
  CheckOrigin: func(r *http.Request) bool {
   return true
  },
 }
 
-type ChatMessage struct {
- Username string `json:"username"`
- Text string `json:"text"`
+type ParkingSpace struct {
+ Size float32 `json:"size"`
+ X float32 `json:"X"`
+ Y float32 `json:"Y"`
 }
 
 func unsafeError(err error) bool {
@@ -38,12 +39,12 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
  clients[ws] = true
 
  //send previous messages if there are any
- if rdb.Exists("chat_messages").Val() != 0 {
-  chatMessages, err := rdb.LRange("chat_messages", 0, -1).Result()
+ if rdb.Exists("parking_spaces").Val() != 0 {
+  parkingSpaces, err := rdb.LRange("parking_spaces", 0, -1).Result()
   if err != nil { panic(err) }
-  for _, chatMessage := range chatMessages {
-   var msg ChatMessage
-   json.Unmarshal([]byte(chatMessage), &msg)
+  for _, parkingSpace := range parkingSpaces {
+   var msg ParkingSpace
+   json.Unmarshal([]byte(parkingSpace), &msg)
    err := ws.WriteJSON(msg)
    if err != nil && unsafeError(err) {
     log.Printf("error: %v", err)
@@ -54,7 +55,7 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
  }
 
  for {
-  var msg ChatMessage
+  var msg ParkingSpace
   err := ws.ReadJSON(&msg)
   //read new message as JSON and map to msg object
   if err != nil {
@@ -73,7 +74,7 @@ func handleMessages() {
   //store message in redis
   json, err := json.Marshal(msg)
   if err != nil { panic(err) }
-  if err := rdb.RPush("chat_messages", json).Err(); err != nil { panic(err) }
+  if err := rdb.RPush("parking_spaces", json).Err(); err != nil { panic(err) }
   //send message to every client currently connected
   for client := range clients {
    err := client.WriteJSON(msg)

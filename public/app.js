@@ -1,24 +1,21 @@
+class Spot {
+    constructor(lat, lon, length, time) {
+        this.lat = lat;
+        this.lon = lon;
+        this.time = time;
+        this.length = length;
+    }
+}
+
+let markers = new Map();
+
 window.addEventListener('DOMContentLoaded', (_) => {
 	let websocket = new WebSocket("wss://" + window.location.host + "/websocket");
-	let room = document.getElementById("chat-text");
+	let room = document.getElementById("parking-space");
 	websocket.addEventListener("message", function (e) {
 		let data = JSON.parse(e.data);
-		let chatContent = `<p><strong>${data.username}</strong>: ${data.text}</p>`;
-		room.insertAdjacentHTML( 'afterbegin', chatContent );
-		room.scrollTop = room.ScrollHeight; //auto scroll to bottom
+		let parkingSpace = new Spot(${data.X},${data.Y},${data.size},${data.time})
 	});
 	
-	let form = document.getElementById("input-form");
-	form.addEventListener("submit", function (event) {
-		event.preventDefault();
-		let username = document.getElementById("input-username");
-		let text = document.getElementById("input-text");
-		websocket.send(
-			JSON.stringify({
-				username: username.value,
-				text: text.value,
-			})
-		);
-		text.value = "";
-	});
+	
 });
