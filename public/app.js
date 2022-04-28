@@ -9,14 +9,13 @@ class Spot {
 
 let markers = new Map();
 
-var gif1 = document.getElementById("gif1")
-gif1.style.visibility = 'hidden';
-var gif2 = document.getElementById("gif2")
-gif2.style.visibility = 'hidden';
-
 window.addEventListener('DOMContentLoaded', (_) => {
 	let websocket = new WebSocket("wss://" + window.location.host + "/websocket");
 	let gif = document.getElementById("parking-space");
+	var gif1 = document.getElementById("gif1")
+	gif1.style.visibility = 'hidden';
+	var gif2 = document.getElementById("gif2")
+	gif2.style.visibility = 'hidden';
 	websocket.addEventListener("message", function (e) {
 		let data = JSON.parse(e.data);
 		let parkingSpace = new Spot(${data.Y},${data.X},${data.size},${data.time})
