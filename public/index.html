@@ -23,9 +23,14 @@
 		<img src="gifs/1.gif" id="gif1" height="100" width="100">
 		<img src="gifs/2.gif" id="gif2" height="100" width="100">
 	</div>
-	<style>
-      #map {position: absolute; top: 0; right: 0; bottom: 0; left: 0;}
-    </style>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+	<style type="text/css">
+		#map { height: 500px; width:1000px; }
+	</style>
+	<div id="map">
+      <a href="https://www.maptiler.com" style="position:absolute;left:10px;bottom:10px;z-index:999;"><img src="https://api.maptiler.com/resources/logo.svg" alt="MapTiler logo"></a>
+    </div>
 </body>
 <script type="application/javascript" src="app.js"></script>
 </html>

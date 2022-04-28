@@ -34,9 +34,9 @@ window.addEventListener('DOMContentLoaded', (_) => {
 	//receive coordinates from websocket
 	websocket.addEventListener("message", function (e) {
 		let data = JSON.parse(e.data);
-		let y = ${data.y}
-		let x = ${data.x}
-		let size = ${data.size}
+		let y = data.y;
+		let x = data.x;
+		let size = data.size;
 	});
 	//end receive coordinates
 	
