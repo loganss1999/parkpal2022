@@ -2,9 +2,6 @@
 <!-- 
 
 TODO!!
-Urgent: convert coordinates from server side to normal lat/lon
-
-Later: create hash table of markers to store address to delete from
 
 
 
@@ -49,7 +46,7 @@ setTimeout(function () {
     <script>
 
 
-// let markers = new Map();
+ let markers = new Map();
 
 
 
@@ -72,51 +69,14 @@ setTimeout(function () {
     shadowAnchor:[29.5,95]
 
 });
-      /*
-      var greenIcon50 = L.icon({
-    iconUrl: 'https://i.ibb.co/CQ1sxd0/Map-Marke2r-PN2-G-Clipart-removebg-preview.png',
-    iconSize:     [26, 36],
-    //iconAnchor:   [32, 72],
-
-});  var greenIcon25 = L.icon({
-    iconUrl: 'https://i.ibb.co/CQ1sxd0/Map-Marke2r-PN2-G-Clipart-removebg-preview.png',
-    iconSize:     [14, 18],
-    //iconAnchor:   [32, 72],
-
-});  var greenIcon2x = L.icon({
-    iconUrl: 'https://i.ibb.co/CQ1sxd0/Map-Marke2r-PN2-G-Clipart-removebg-preview.png',
-    iconSize:     [106, 140],
-    //iconAnchor:   [32, 72],
-
-});  
-all_testptLayer.eachLayer(function(layer) {
-map.on('zoomend', function() {
-    var currentZoom = map.getZoom();
-    if (currentZoom > 16) {
-        all_testptLayer.eachLayer(function(layer) {
-            if (layer.feature.properties.num < 0.5)
-                return layer.setIcon(greenIcon50);
-            else if (feature.properties.num < 1.0)
-                return layer.setIcon(greenIcon25);
-        });
-    } else {
-        all_testptLayer.eachLayer(function(layer) {
-            if (layer.feature.properties.num < 0.5)
-                return layer.setIcon(greenIcon);
-            else if (feature.properties.num < 1.0)
-                return layer.setIcon(greenIcon2x);
-        });
-    }
-});
-});
-      all_testptLayer.addTo(map);
-      */
+    
 
       function onClick(e) {
     alert(this.getLatLng());
 }
 
-      var marker = L.marker([40.7440, -74.0324], {icon: greenIcon}).addTo(map).on('click', onClick);
+    var marker = L.marker([40.7440, -74.0324], {icon: greenIcon}).addTo(map).on('click', onClick);
+      markers.set(40.7440.toString() + -74.0324.toString(), marker); // tester code for Map of markers
 
       var marker = L.marker([40.731966, -74.039354], {icon: greenIcon}).addTo(map).on('click', onClick);
 
@@ -125,12 +85,18 @@ map.on('zoomend', function() {
       var marker = L.marker([40.739098, -74.032499], {icon: greenIcon}).addTo(map).on('click', onClick);
 
 /*
+
+    
+
       window.addEventListener('DOMContentLoaded', (_) => {
     let websocket = new WebSocket("wss://" + window.location.host + "/websocket");
     let room = document.getElementById("parking-space");
     websocket.addEventListener("coords", function (e) {
         let data = JSON.parse(e.data);
-        var marker = L.marker([x,y], {icon: greenIcon}).addTo(map);
+        let lat = y*0.000008706 + 42.337098;
+        let lon = x*0.0000123172 + -71.036649;
+        var marker = L.marker([lat,lon], {icon: greenIcon}).addTo(map).on('click', onClick);
+        markers.set(lat.toString() + lon.toString(), marker);
     });
 
    */
