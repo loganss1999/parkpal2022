@@ -37,7 +37,7 @@ window.addEventListener('DOMContentLoaded', (_) => {
 		websocket.send(
 		  car: car.value,
 		);
-	}
+	};
 	car.value = 0;
-	
+	});
 });
