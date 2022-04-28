@@ -22,9 +22,9 @@ var upgrader = websocket.Upgrader {
 }
 
 type ParkingSpace struct {
- Size float32 `json:"size"`
- X float32 `json:"X"`
- Y float32 `json:"Y"`
+ size float32 `json:"size"`
+ x float32 `json:"x"`
+ y float32 `json:"y"`
 }
 
 func unsafeError(err error) bool {
@@ -71,12 +71,21 @@ func handleMessages() {
  for {
   //grab any next message from channel
   msg := <-broadcaster
-  //store message in redis
+
   json, err := json.Marshal(msg)
   if err != nil { panic(err) }
+  if msg == "1" {
+	for client := range clients {
+   err := client.WriteJSON(ParkingSpace{x:})
+   if err != nil && unsafeError(err) {
+    log.Printf("error: %v", err)
+    client.Close()
+    delete(clients, client)
+  }
+  //store message in redis
   if err := rdb.RPush("parking_spaces", json).Err(); err != nil { panic(err) }
   //send message to every client currently connected
-  for client := range clients {
+  for client := range clients {x: 1000.0, y:1000.0, size:3.0}
    err := client.WriteJSON(msg)
    if err != nil && unsafeError(err) {
     log.Printf("error: %v", err)
