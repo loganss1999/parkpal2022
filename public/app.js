@@ -19,21 +19,17 @@ window.addEventListener('DOMContentLoaded', (_) => {
 	websocket.addEventListener("message", function (e) {
 		let data = JSON.parse(e.data);
 	});
-	
-	let form = document.getElementById("input-form");
-	form.addEventListener("submit", function (event) {
-    event.preventDefault();
-    let car = document.getElementById("car")
-    if (car.value != 0) {
-		if(car.value == "1") {
-			gif1.style.visibility = 'visible';
-			gif2.style.visibility = 'hidden';
-		}
-		if(car.value == "2") {
-			gif2.style.visibility = 'visible';
-			gif1.style.visibility = 'hidden';
-		}
-	};
-	car.value = 0;
-	});
+    function clicked(car) {
+		if (car.value != "0") {
+			if(car.value == "1") {
+				gif1.style.visibility = 'visible';
+				gif2.style.visibility = 'hidden';
+			}
+			if(car.value == "2") {
+				gif2.style.visibility = 'visible';
+				gif1.style.visibility = 'hidden';
+			}
+		};
+	car.value = "0";
+	}
 });
