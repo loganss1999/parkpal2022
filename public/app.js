@@ -34,7 +34,7 @@ window.addEventListener('DOMContentLoaded', (_) => {
 			gif1.style.visibility = 'hidden';
 		}
 		websocket.send(
-		  car: car.value,
+		  car: car.value
 		);
 	};
 	car.value = 0;
