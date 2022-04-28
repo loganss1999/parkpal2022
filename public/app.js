@@ -25,11 +25,11 @@ window.addEventListener('DOMContentLoaded', (_) => {
     event.preventDefault();
     let car = document.getElementById("car")
     if (car.value != 0) {
-		if(car.value == 1) {
+		if(car.value == "1") {
 			gif1.style.visibility = 'visible';
 			gif2.style.visibility = 'hidden';
 		}
-		if(car.value == 2) {
+		if(car.value == "2") {
 			gif2.style.visibility = 'visible';
 			gif1.style.visibility = 'hidden';
 		}
