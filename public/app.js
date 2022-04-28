@@ -33,9 +33,6 @@ window.addEventListener('DOMContentLoaded', (_) => {
 			gif2.style.visibility = 'visible';
 			gif1.style.visibility = 'hidden';
 		}
-		websocket.send(
-		  car: car.value
-		);
 	};
 	car.value = 0;
 	});
