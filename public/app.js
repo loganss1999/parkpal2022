@@ -1,12 +1,3 @@
-class Spot {
-    constructor(lat, lon, length, time) {
-        this.lat = lat;
-        this.lon = lon;
-        this.time = time;
-        this.length = length;
-    }
-}
-
 let markers = new Map();
 
 window.addEventListener('DOMContentLoaded', (_) => {
@@ -19,17 +10,24 @@ window.addEventListener('DOMContentLoaded', (_) => {
 	websocket.addEventListener("message", function (e) {
 		let data = JSON.parse(e.data);
 	});
-    function clicked(car) {
-		if (car.value != "0") {
-			if(car.value == "1") {
-				gif1.style.visibility = 'visible';
-				gif2.style.visibility = 'hidden';
-			}
-			if(car.value == "2") {
-				gif2.style.visibility = 'visible';
-				gif1.style.visibility = 'hidden';
-			}
-		};
-	car.value = "0";
+	
+	let form = document.getElementById("input-form");
+	form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    var activeElement = document.activeElement;
+	if(activeElement.value == "1") {
+		gif1.style.visibility = 'visible';
+		gif2.style.visibility = 'hidden';
 	}
+	if(activeElement.value == "2") {
+		gif2.style.visibility = 'visible';
+		gif1.style.visibility = 'hidden';
+	}
+	websocket.send(
+      JSON.stringify({
+        username: username.value,
+        text: text.value,
+      })
+    );
+	});
 });
