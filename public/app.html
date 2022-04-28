@@ -1,28 +1,18 @@
-
 <!-- 
-
 TODO!!
-
-
-
 js code for sean to implement
-
 setTimeout(code)
 setTimeout(code, delay)
-
 setTimeout(functionRef)
 setTimeout(functionRef, delay)
 setTimeout(functionRef, delay, arg0)
 setTimeout(functionRef, delay, arg0, arg1)
 setTimeout(functionRef, delay, arg0, arg1, /* ... ,*/ argN)
-
 setTimeout(function () {
         marker.setMap(null);
         delete marker;
     }, 2000);
     return marker;
-
-
  -->
 
 
@@ -73,11 +63,16 @@ setTimeout(function () {
 
       function onClick(e) {
     alert(this.getLatLng());
+
 }
 
-    var marker = L.marker([40.7440, -74.0324], {icon: greenIcon}).addTo(map).on('click', onClick);
-      markers.set(40.7440.toString() + -74.0324.toString(), marker); // tester code for Map of markers
+function onMouseover(e) {
+    this.openPopup();
+}
 
+    var marker = L.marker([40.7440, -74.0324], {icon: greenIcon}).addTo(map).on('mouseover', onMouseover).on('click', onClick);
+      // markers.set(40.7440.toString() + -74.0324.toString(), marker); // tester code for Map of markers
+      marker.bindPopup(4 + ' meters');
       var marker = L.marker([40.731966, -74.039354], {icon: greenIcon}).addTo(map).on('click', onClick);
 
       var marker = L.marker([40.740153, -74.033861], {icon: greenIcon}).addTo(map).on('click', onClick);
@@ -85,25 +80,24 @@ setTimeout(function () {
       var marker = L.marker([40.739098, -74.032499], {icon: greenIcon}).addTo(map).on('click', onClick);
 
 /*
-
     
-
       window.addEventListener('DOMContentLoaded', (_) => {
     let websocket = new WebSocket("wss://" + window.location.host + "/websocket");
     let room = document.getElementById("parking-space");
-    websocket.addEventListener("coords", function (e) {
+    websocket.addEventListener("message", function (e) {
         let data = JSON.parse(e.data);
+        let y = ${data.y};
+    let x = ${data.x};
+    let size = ${data.size};
         let lat = y*0.000008706 + 42.337098;
         let lon = x*0.0000123172 + -71.036649;
         var marker = L.marker([lat,lon], {icon: greenIcon}).addTo(map).on('click', onClick);
-        markers.set(lat.toString() + lon.toString(), marker);
+        marker.bindPopup(size + 'meters');
+       // markers.set(lat.toString() + lon.toString(), marker);
     });
-
    */
     </script>
 
 
   </body>
 </html>
-
-
