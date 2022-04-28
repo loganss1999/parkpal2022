@@ -7,27 +7,38 @@ window.addEventListener('DOMContentLoaded', (_) => {
 	gif1.style.visibility = 'hidden';
 	var gif2 = document.getElementById("gif2")
 	gif2.style.visibility = 'hidden';
-	websocket.addEventListener("message", function (e) {
-		let data = JSON.parse(e.data);
-	});
+	var oldgif;
 	
+	//sends button press to main.go via websocket
 	let form = document.getElementById("input-form");
 	form.addEventListener("submit", function (event) {
     event.preventDefault();
     var activeElement = document.activeElement;
 	if(activeElement.value == "1") {
 		gif1.style.visibility = 'visible';
-		gif2.style.visibility = 'hidden';
+		oldgif.style.visibility = 'hidden';
+		oldgif = gif1;
 	}
 	if(activeElement.value == "2") {
 		gif2.style.visibility = 'visible';
-		gif1.style.visibility = 'hidden';
+		oldgif.style.visibility = 'hidden';
+		oldgif = gif2;
 	}
 	websocket.send(
       JSON.stringify({
-        username: username.value,
-        text: text.value,
+		scene: activeElement.value
       })
     );
+	//end of sending
+	
+	//receive coordinates from websocket
+	websocket.addEventListener("message", function (e) {
+		let data = JSON.parse(e.data);
+		let y = ${data.y}
+		let x = ${data.x}
+		let size = ${data.size}
+	});
+	//end receive coordinates
+	
 	});
 });
