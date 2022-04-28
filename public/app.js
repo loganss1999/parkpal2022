@@ -18,7 +18,7 @@ window.addEventListener('DOMContentLoaded', (_) => {
 	gif2.style.visibility = 'hidden';
 	websocket.addEventListener("message", function (e) {
 		let data = JSON.parse(e.data);
-		let parkingSpace = new Spot(${data.Y},${data.X},${data.size},${data.time})
+		let parkingSpace = new Spot(${data.Y},${data.X},${data.size},${data.time});
 	});
 	
 	let form = document.getElementById("input-form");
