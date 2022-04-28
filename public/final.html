@@ -1,0 +1,159 @@
+
+Skip to content
+Pull requests
+Issues
+Marketplace
+Explore
+@sean-mel
+loganss1999 /
+parkpal2022
+Public
+
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+
+    Insights
+
+parkpal2022/public/app.html
+@sean-mel
+sean-mel Add files via upload
+Latest commit 7449d7b 12 hours ago
+History
+1 contributor
+143 lines (107 sloc) 5.18 KB
+
+<!-- 
+TODO!!
+Urgent: convert coordinates from server side to normal lat/lon
+Later: create hash table of markers to store address to delete from
+js code for sean to implement
+setTimeout(code)
+setTimeout(code, delay)
+setTimeout(functionRef)
+setTimeout(functionRef, delay)
+setTimeout(functionRef, delay, arg0)
+setTimeout(functionRef, delay, arg0, arg1)
+setTimeout(functionRef, delay, arg0, arg1, /* ... ,*/ argN)
+setTimeout(function () {
+        marker.setMap(null);
+        delete marker;
+    }, 2000);
+    return marker;
+ -->
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+    <style>
+      #map {position: absolute; top: 0; right: 0; bottom: 0; left: 0;}
+    </style>
+  </head>
+  <body>
+    <div id="map">
+      <a href="https://www.maptiler.com" style="position:absolute;left:10px;bottom:10px;z-index:999;"><img src="https://api.maptiler.com/resources/logo.svg" alt="MapTiler logo"></a>
+    </div>
+    <p><a href="https://www.maptiler.com/copyright/" target="_blank">© MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">© OpenStreetMap contributors</a></p>
+
+
+    <script>
+
+
+ let markers = new Map();
+
+
+
+      var map = L.map('map').setView([40.7440, -74.0324], 15);
+      L.tileLayer('https://api.maptiler.com/maps/openstreetmap/{z}/{x}/{y}.jpg?key=DNCiULABgsnLAzJKiWCp',{
+        tileSize: 512,
+        zoomOffset: -1,
+        minZoom: 5,
+        attribution: "\u003ca href=\"https://www.maptiler.com/copyright/\" target=\"_blank\"\u003e\u0026copy; MapTiler\u003c/a\u003e \u003ca href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\"\u003e\u0026copy; OpenStreetMap contributors\u003c/a\u003e",
+        crossOrigin: true
+      }).addTo(map);
+
+      var greenIcon = L.icon({
+    iconUrl: 'https://i.ibb.co/CQ1sxd0/Map-Marke2r-PN2-G-Clipart-removebg-preview.png',
+    shadowUrl: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACkAAAApCAQAAAACach9AAACMUlEQVR4Ae3ShY7jQBAE0Aoz/f9/HTMzhg1zrdKUrJbdx+Kd2nD8VNudfsL/Th///dyQN2TH6f3y/BGpC379rV+S+qqetBOxImNQXL8JCAr2V4iMQXHGNJxeCfZXhSRBcQMfvkOWUdtfzlLgAENmZDcmo2TVmt8OSM2eXxBp3DjHSMFutqS7SbmemzBiR+xpKCNUIRkdkkYxhAkyGoBvyQFEJEefwSmmvBfJuJ6aKqKWnAkvGZOaZXTUgFqYULWNSHUckZuR1HIIimUExutRxwzOLROIG4vKmCKQt364mIlhSyzAf1m9lHZHJZrlAOMMztRRiKimp/rpdJDc9Awry5xTZCte7FHtuS8wJgeYGrex28xNTd086Dik7vUMscQOa8y4DoGtCCSkAKlNwpgNtphjrC6MIHUkR6YWxxs6Sc5xqn222mmCRFzIt8lEdKx+ikCtg91qS2WpwVfBelJCiQJwvzixfI9cxZQWgiSJelKnwBElKYtDOb2MFbhmUigbReQBV0Cg4+qMXSxXSyGUn4UbF8l+7qdSGnTC0XLCmahIgUHLhLOhpVCtw4CzYXvLQWQbJNmxoCsOKAxSgBJno75avolkRw8iIAFcsdc02e9iyCd8tHwmeSSoKTowIgvscSGZUOA7PuCN5b2BX9mQM7S0wYhMNU74zgsPBj3HU7wguAfnxxjFQGBE6pwN+GjME9zHY7zGp8wVxMShYX9NXvEWD3HbwJf4giO4CFIQxXScH1/TM+04kkBiAAAAAElFTkSuQmCC',
+    // iconSize:     [23, 37],
+    //custom marker is already correct size
+    shadowSize:[80,100],
+    iconAnchor:[32, 72],
+    shadowAnchor:[29.5,95]
+
+});
+      /*
+      var greenIcon50 = L.icon({
+    iconUrl: 'https://i.ibb.co/CQ1sxd0/Map-Marke2r-PN2-G-Clipart-removebg-preview.png',
+    iconSize:     [26, 36],
+    //iconAnchor:   [32, 72],
+});  var greenIcon25 = L.icon({
+    iconUrl: 'https://i.ibb.co/CQ1sxd0/Map-Marke2r-PN2-G-Clipart-removebg-preview.png',
+    iconSize:     [14, 18],
+    //iconAnchor:   [32, 72],
+});  var greenIcon2x = L.icon({
+    iconUrl: 'https://i.ibb.co/CQ1sxd0/Map-Marke2r-PN2-G-Clipart-removebg-preview.png',
+    iconSize:     [106, 140],
+    //iconAnchor:   [32, 72],
+});  
+all_testptLayer.eachLayer(function(layer) {
+map.on('zoomend', function() {
+    var currentZoom = map.getZoom();
+    if (currentZoom > 16) {
+        all_testptLayer.eachLayer(function(layer) {
+            if (layer.feature.properties.num < 0.5)
+                return layer.setIcon(greenIcon50);
+            else if (feature.properties.num < 1.0)
+                return layer.setIcon(greenIcon25);
+        });
+    } else {
+        all_testptLayer.eachLayer(function(layer) {
+            if (layer.feature.properties.num < 0.5)
+                return layer.setIcon(greenIcon);
+            else if (feature.properties.num < 1.0)
+                return layer.setIcon(greenIcon2x);
+        });
+    }
+});
+});
+      all_testptLayer.addTo(map);
+      */
+
+      function onClick(e) {
+    alert(this.getLatLng());
+}
+      var marker = L.marker([40.7440, -74.0324], {icon: greenIcon}).addTo(map).on('click', onClick);
+      markers.set(40.7440.toString() + -74.0324.toString(), marker); // tester code for Map of markers
+
+      var marker = L.marker([40.731966, -74.039354], {icon: greenIcon}).addTo(map).on('click', onClick);
+
+      var marker = L.marker([40.740153, -74.033861], {icon: greenIcon}).addTo(map).on('click', onClick);
+
+      var marker = L.marker([40.739098, -74.032499], {icon: greenIcon}).addTo(map).on('click', onClick);
+
+
+/*
+      window.addEventListener('DOMContentLoaded', (_) => {
+    let websocket = new WebSocket("wss://" + window.location.host + "/websocket");
+    let room = document.getElementById("parking-space");
+    websocket.addEventListener("coords", function (e) {
+        if (!markers.has(lat.toString()+lon.) {
+  greeting = "Good day";
+}
+        let data = JSON.parse(e.data);
+        var marker = L.marker([x,y], {icon: greenIcon}).addTo(map);
+    });
+   */
+    </script>
+
+
+  </body>
+</html>
