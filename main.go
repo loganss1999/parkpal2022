@@ -61,15 +61,15 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
  }
 
  for {
-  var msg ParkingSpace
-  err := ws.ReadJSON(&msg)
-  //read new message as JSON and map to msg object
+  var input Car
+  err := ws.ReadJSON(&input)
+  //read new message as JSON and map to input object
   if err != nil {
    delete(clients,ws)
    break
   }
   //send new message to the channel
-  outcast <- msg
+  incast <- input
  }
 }
 
