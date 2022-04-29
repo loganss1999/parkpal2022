@@ -1,4 +1,5 @@
 let markers = new Map();
+const delay = ms => new Promise(res => setTimeout(res, ms));
 
 window.addEventListener('DOMContentLoaded', (_) => {
 	var map = L.map('map').setView([42.3463, -71.0421], 15);
@@ -9,7 +10,40 @@ window.addEventListener('DOMContentLoaded', (_) => {
         attribution: "\u003ca href=\"https://www.maptiler.com/copyright/\" target=\"_blank\"\u003e\u0026copy; MapTiler\u003c/a\u003e \u003ca href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\"\u003e\u0026copy; OpenStreetMap contributors\u003c/a\u003e",
         crossOrigin: true
       }).addTo(map);
-	let websocket = new WebSocket("wss://" + window.location.host + "/websocket");
+	const post = async (activeElement) => {
+		if(activeElement == "1") {
+			var marker = L.marker([42.342834, -71.045756], {icon: greenIcon}).addTo(map).on('click', onClick);
+			marker.bindPopup(3.4 + ' meters');
+			var marker = L.marker([42.342467, -71.046437], {icon: greenIcon}).addTo(map).on('click', onClick);
+			marker.bindPopup(8.9 + ' meters');
+			var marker = L.marker([42.343482, -71.045493], {icon: greenIcon}).addTo(map).on('click', onClick);
+			marker.bindPopup(2.9 + ' meters');
+			await delay(2000);
+			var marker = L.marker([42.344402, -71.044560], {icon: greenIcon}).addTo(map).on('click', onClick);
+			marker.bindPopup(4.1 + ' meters');
+			var marker = L.marker([42.345305, -71.043351], {icon: greenIcon}).addTo(map).on('click', onClick);
+			marker.bindPopup(4.0 + ' meters');
+			await delay(2000);
+			var marker = L.marker([42.345380, -71.042644], {icon: greenIcon}).addTo(map).on('click', onClick);
+			marker.bindPopup(9.3 + ' meters');
+			await delay(2000);
+			var marker = L.marker([42.345713, -71.042322], {icon: greenIcon}).addTo(map).on('click', onClick);
+			marker.bindPopup(3.0 + ' meters');
+			var marker = L.marker([42.346117, -71.042494], {icon: greenIcon}).addTo(map).on('click', onClick);
+			marker.bindPopup(5.5 + ' meters');
+			await delay(2000);
+		}
+		if(activeElement == "2") {
+		}
+		if(activeElement == "3") {
+		}
+		if(activeElement == "4") {
+		}
+		if(activeElement == "5") {
+		}
+	}
+	
+
 	let f = document.getElementById("parking-space");
 	
 	//sends button press to main.go via websocket
@@ -17,6 +51,7 @@ window.addEventListener('DOMContentLoaded', (_) => {
 	form.addEventListener("submit", function (event) {
     event.preventDefault();
     var activeElement = document.activeElement;
+	post(activeElement.value);
 	if(activeElement.value == "1") {
 		document.getElementById("gif").src="gifs/1.gif";
 	}
@@ -32,11 +67,6 @@ window.addEventListener('DOMContentLoaded', (_) => {
 	if(activeElement.value == "5") {
 		document.getElementById("gif").src="gifs/5.gif";
 	}
-	websocket.send(
-      JSON.stringify({
-		carid: activeElement.value
-      })
-    );
 	});
 	//end of sending
 	  	
