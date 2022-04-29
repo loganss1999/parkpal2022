@@ -136,31 +136,8 @@ window.addEventListener('DOMContentLoaded', (_) => {
 function onMouseover(e) {
     this.openPopup();
 }
-
-    var marker = L.marker([40.7440, -74.0324], {icon: greenIcon}).addTo(map).on('click', onClick);
-      markers.set(40.7440.toString() + -74.0324.toString(), marker); // tester code for Map of markers
-	marker.bindPopup(4 + ' meters');
-      var marker = L.marker([40.731966, -74.039354], {icon: greenIcon}).addTo(map).on('click', onClick);
-
-      var marker = L.marker([40.740153, -74.033861], {icon: greenIcon}).addTo(map).on('click', onClick);
-
-      var marker = L.marker([40.739098, -74.032499], {icon: greenIcon}).addTo(map).on('click', onClick);
-	
-		//receive coordinates from websocket
-	websocket.addEventListener("message", function (e) {
-		let data = JSON.parse(e.data);
-		let y = data.y;
-		let x = data.x;
-		let size = data.size;
-		let lat = y*0.000008706 + 42.337098;
-        let lon = x*0.0000123172 + -71.036649;
-        var marker = L.marker([lat,lon], {icon: greenIcon}).addTo(map).on('click', onClick);
-        marker.bindPopup(size + 'meters');
-	});
-	//end receive coordinates
 });
-
-window.onload = () => {
+   window.onload = () => {
     const tab_switchers = document.querySelectorAll('[data-switcher]');
 
     for (let i = 0; i < tab_switchers.length; i++) {
@@ -185,3 +162,6 @@ function SwitchPage (page_id) {
     const next_page = document.querySelector(`.pages .page[data-page="${page_id}"]`);
     next_page.classList.add('is-active');
 }
+
+	//end receive coordinates
+
