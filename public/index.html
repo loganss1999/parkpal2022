@@ -32,7 +32,8 @@
 		<section class="pages">
 
             <div class="page is-active" data-page="1">
-                <h2>Parking Simulator</h2>
+                <h2>Street Parking Detector Simulator</h2>
+				<br>
                 <form id="input-form" class="form-inline">
                     <button name = "car" type="submit" value="1" style="height: 30px; width: 80px;">Car 1</button>
                     <button name = "car" type="submit" value="2" style="height: 30px; width: 80px;">Car 2</button>
@@ -40,9 +41,10 @@
                     <button name = "car" type="submit" value="4" style="height: 30px; width: 80px;">Car 4</button>
                     <button name = "car" type="submit" value="5" style="height: 30px; width: 80px;">Car 5</button>
                 </form>
+				<br>
                 <img src="gifs/parkpal.png" id="gif" height="360" width="640" alt="cars driving around" >
 				<style type="text/css">
-                    #map {margin-left: 850px; margin-top: 300px; height: 500px; width:500px; }
+                    #map {margin-left: 850px; margin-top: 275px; height: 500px; width:500px; }
                 </style>
                     <div id="map">
                     <a href="https://www.maptiler.com" style="position:absolute;left:0px;bottom:10px;z-index:999;"><img src="https://api.maptiler.com/resources/logo.svg" alt="MapTiler logo"></a>
@@ -51,15 +53,73 @@
 
             <div class="page" data-page="2">
                 <h2>A Little More About Us</h2>
+				<br>
                 <p>
-					Parking in urban areas is notoriously sparse and may require many irritating minutes searching for available spots to be able to find one large enough for your car. For NYC specifically, this is equivalent to 15 minutes per trip, and balloons to 107 hours per year. [Braibanti]  This project reduced the amount of time used to find these spots, and the irritation associated with it. This is accomplished creating a program that connects the cars already implemented and running sensors, including LiDAR detection to record available parking spots on a map, unconsciously as the user/driver goes about their daily tasks. This map is updated by and accessible to all other users of the application in the area. By doing this, it will ensure that the information provided by the system is as up to date and accurate as possible. This map, when accessed, allows users to find the location of an available street or lot parking spot, and drive directly to it, avoiding searching, and paying for costly garages. 
+					Parking in urban areas is notoriously sparse and may require many irritating minutes searching for available spots to be able to find one large enough for your car. For NYC specifically, this is equivalent to 15 minutes per trip, and balloons to 107 hours per year. This project reduced the amount of time used to find these spots, and the irritation associated with it. This is accomplished creating a program that connects the cars already implemented and running sensors, including LiDAR detection to record available parking spots on a map, unconsciously as the user/driver goes about their daily tasks. This map is updated by and accessible to all other users of the application in the area. By doing this, it will ensure that the information provided by the system is as up to date and accurate as possible. This map, when accessed, allows users to find the location of an available street or lot parking spot, and drive directly to it, avoiding searching, and paying for costly garages. 
 				</p>
+				<p>	This is now accomplishable due to the push for autonomation in cars. Currently, the types of sensors required are only available in luxury vehicles, but it is to be expected in the recent future for these sensors to be available in most standard models of cars. This is evident in the cost of LiDAR going down with new technologies, and the price of the global LiDAR market increasing, showing interest and accessibility to the technology. It has been predicted by IEEE members that autonomous vehicles will make up 75% of the cars on the road by the year 2040. Due to this, the market for this product is projected to increase by this same percent, as the project requires these new sensors implemented in these cars to perform the required tasks. 
+				</p>
+				<br>
+				<h2>
+					Customers
+				</h2>
+				<br>
+				<ul>
+					<li>Car Companies</li>
+					<li>Mobile App Consumers</li>
+					<li>Frequent Drivers in Urban Areas</li>
+					<li>People who travel to/from Urban Areas Semi-Frequently</li>
+				</ul>
+				<br>
+				<h2>
+					Needs
+				</h2>
+				<br>
+				<p>
+					An easier way of finding parking spots in urban areas. Currently, parking is sparse in urban areas and drivers often spend tens of minutes looking for spots, causing irritation, and wasting time and money. This time endeavor finding spots wastes $72.7 billion dollars a year in the US, and for an individual driver in NYC, $2,254 a year. In addition, the other option of parking garages is costly.
+				</p>
+				<br>
+				<ul>
+					<li>Easy to Use</li>
+					<li>Not distracting while driving</li>
+					<li>Continuous spot reports and map updates for the most accurate information</li>
+					<li>Reduce time finding parking spot</li>
+				</ul>
+				<br>
+				<h2>Needs Requirements Mapping</h2> 
+				<br>
+				<h3>Continuous Spot Report and Map Updating</h3>
+				<br>
+				<ul>
+					<li>Measure and record parallel parking spot sizes, GPS location and time taken</li>
+					<li>Remove spot marker when others pass and spot is not seen anymore, and when the user itself parks in that location</li>
+				</ul>
+				<br>
+				<h3>Easy to Use</h3>
+				<br>
+				<ul>
+					<li>Compile information on a user accessible map</li>
+					<li>Create easy to distinguish markers to denote available spots</li>
+					<li>Make the map accessible on the dashboard of the drivers car</li>
+					<li>Not distracting</li>
+				</ul>
             </div>
 
 
             <div class="page" data-page="3">
-                <h2>Page 3</h2>
-                <p>Welcome to the Contact page</p>
+                <h3>Welcome to the Contact page</h3>
+				<div class="container">	
+					<div class="jumbotron">
+					<style type="text/css">
+						#jumbotron {margin-left: 142px; margin-top: 275px; height: 500px; width:500px; font-size: 20px; }
+					</style>
+				<h3>Christina Berke: cberke@stevens.edu Electrical Engineer. <br> Spot Detection and Marketing and Management Teams. <br><br>
+					Balal Khan: bkhan3@stevens.edu Computer Engineer. <br> Map and Marketing and Management Teams. User Interface. <br><br>
+					Sean Melone: smelone@stevens.edu Computer Engineer. <br> Spot Detection and Map Teams. Front-End Developer. <br><br>
+					Logan Smith: lsmith5@stevens.edu Computer Engineer. <br> Spot Detection and Map Teams. Back-End Developer. <br><br>
+				</h3>
+	</div>
+				</div>
             </div>
 
         </section>
