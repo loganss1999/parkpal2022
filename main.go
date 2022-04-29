@@ -4,6 +4,7 @@ import (
  "net/http"
  "os"
  "io"
+ "fmt"
  "encoding/json"
  "github.com/gorilla/websocket"
  "github.com/joho/godotenv"
@@ -45,40 +46,22 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
  clients[ws] = true
 
  //send previous messages if there are any
- if rdb.Exists("parking_spaces").Val() != 0 {
-  parkingSpaces, err := rdb.LRange("parking_spaces", 0, -1).Result()
-  if err != nil { panic(err) }
-  for _, parkingSpace := range parkingSpaces {
-   var msg ParkingSpace
-   json.Unmarshal([]byte(parkingSpace), &msg)
-   err := ws.WriteJSON(msg)
-   if err != nil && unsafeError(err) {
-    log.Printf("error: %v", err)
-    ws.Close()
-    delete(clients, ws)
    }
   }
- }
-
- for {
-  var input Car
-  err := ws.ReadJSON(&input)
-  //read new message as JSON and map to input object
-  if err != nil {
-   delete(clients,ws)
-   break
-  }
-  //send new message to the channel
-  incast <- input
  }
 }
 
 func handleMessages() {
- for {
   //grab any next message from channel
-  input := <-incast
   for client := range clients {
-  if input.carid == 1 {
+  var msg Car
+  err := ws.ReadJSON(&msg)
+		if err != nil {
+			delete(clients, ws)
+			break
+		}
+  
+  if msg.carid == 1 {
 	
    err := client.WriteJSON(ParkingSpace{x: 1000, y:1000, size:3})
    if err != nil && unsafeError(err) {
