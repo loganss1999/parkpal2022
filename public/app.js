@@ -32,7 +32,7 @@ window.addEventListener('DOMContentLoaded', (_) => {
 	}
 	websocket.send(
       JSON.stringify({
-		scene: activeElement.value
+		carid: activeElement.value
       })
     );
 	});
