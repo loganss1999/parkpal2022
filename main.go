@@ -13,8 +13,10 @@ import (
 var (
  rdb *redis.Client
 )
+
 var clients = make(map[*websocket.Conn]bool)
-var broadcaster = make(chan ParkingSpace)
+var incast = make(chan Car)
+var outcast = make(chan ParkingSpace)
 var upgrader = websocket.Upgrader {
  CheckOrigin: func(r *http.Request) bool {
   return true
@@ -25,6 +27,10 @@ type ParkingSpace struct {
  size float32 `json:"size"`
  x float32 `json:"x"`
  y float32 `json:"y"`
+}
+
+type Car struct {
+ carid int `json:"carid"`
 }
 
 func unsafeError(err error) bool {
@@ -63,37 +69,28 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
    break
   }
   //send new message to the channel
-  broadcaster <- msg
+  outcast <- msg
  }
 }
 
 func handleMessages() {
  for {
   //grab any next message from channel
-  msg := <-broadcaster
-
-  json, err := json.Marshal(msg)
-  if err != nil { panic(err) }
-  if msg == "1" {
-	for client := range clients {
-   err := client.WriteJSON(ParkingSpace{x:})
+  input := <-incast
+  for client := range clients {
+  if input.carid == 1 {
+	
+   err := client.WriteJSON(ParkingSpace{x: 1000, y:1000, size:3})
    if err != nil && unsafeError(err) {
     log.Printf("error: %v", err)
     client.Close()
     delete(clients, client)
+  }
   }
   //store message in redis
-  if err := rdb.RPush("parking_spaces", json).Err(); err != nil { panic(err) }
-  //send message to every client currently connected
-  for client := range clients {x: 1000.0, y:1000.0, size:3.0}
-   err := client.WriteJSON(msg)
-   if err != nil && unsafeError(err) {
-    log.Printf("error: %v", err)
-    client.Close()
-    delete(clients, client)
+  
    }
   }
- }
 }
 
 func main() {
