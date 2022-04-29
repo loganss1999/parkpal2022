@@ -25,13 +25,10 @@ window.addEventListener('DOMContentLoaded', (_) => {
 	if(activeElement.value == "1") {
 		gif1.style.visibility = 'visible';
 		gif2.style.visibility = 'hidden';
-		L.marker([1800*0.000008706 + 42.337098, 800*0.0000123172 + -71.036649], {icon: greenIcon}).addTo(map).on('click', onClick);
-		
 	}
 	if(activeElement.value == "2") {
 		gif2.style.visibility = 'visible';
 		gif1.style.visibility = 'hidden';
-		L.marker([500*0.000008706 + 42.337098, 500*0.0000123172 + -71.036649], {icon: greenIcon}).addTo(map).on('click', onClick);
 	}
 	websocket.send(
       JSON.stringify({
