@@ -36,6 +36,7 @@ setTimeout(function () {
     <script>
 
 
+
  let markers = new Map();
 
 
@@ -69,10 +70,11 @@ setTimeout(function () {
 function onMouseover(e) {
     this.openPopup();
 }
-
+    var today = new Date();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     var marker = L.marker([40.7440, -74.0324], {icon: greenIcon}).addTo(map).on('mouseover', onMouseover).on('click', onClick);
       // markers.set(40.7440.toString() + -74.0324.toString(), marker); // tester code for Map of markers
-      marker.bindPopup(4 + ' meters');
+      marker.bindPopup(4 + ' meter spot seen at ' + time);
       var marker = L.marker([40.731966, -74.039354], {icon: greenIcon}).addTo(map).on('click', onClick);
 
       var marker = L.marker([40.740153, -74.033861], {icon: greenIcon}).addTo(map).on('click', onClick);
@@ -93,7 +95,7 @@ function onMouseover(e) {
         let lon = x*0.0000123172 + -71.036649;
         var marker = L.marker([lat,lon], {icon: greenIcon}).addTo(map).on('click', onClick);
         marker.bindPopup(size + 'meters');
-       // markers.set(lat.toString() + lon.toString(), marker);
+       // markers.set(lat+ "" + lon, marker);
     });
    */
     </script>
