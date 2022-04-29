@@ -10,12 +10,7 @@ window.addEventListener('DOMContentLoaded', (_) => {
         crossOrigin: true
       }).addTo(map);
 	let websocket = new WebSocket("wss://" + window.location.host + "/websocket");
-	let gif = document.getElementById("parking-space");
-	var gif1 = document.getElementById("gif1")
-	gif1.style.visibility = 'hidden';
-	var gif2 = document.getElementById("gif2")
-	gif2.style.visibility = 'hidden';
-	var oldgif;
+	let f = document.getElementById("parking-space");
 	
 	//sends button press to main.go via websocket
 	let form = document.getElementById("input-form");
@@ -23,12 +18,19 @@ window.addEventListener('DOMContentLoaded', (_) => {
     event.preventDefault();
     var activeElement = document.activeElement;
 	if(activeElement.value == "1") {
-		gif1.style.visibility = 'visible';
-		gif2.style.visibility = 'hidden';
+		document.getElementById("gif").src="gifs/1.gif";
 	}
 	if(activeElement.value == "2") {
-		gif2.style.visibility = 'visible';
-		gif1.style.visibility = 'hidden';
+		document.getElementById("gif").src="gifs/2.gif";
+	}
+	if(activeElement.value == "3") {
+		document.getElementById("gif").src="gifs/3.gif";
+	}
+	if(activeElement.value == "4") {
+		document.getElementById("gif").src="gifs/4.gif";
+	}
+	if(activeElement.value == "5") {
+		document.getElementById("gif").src="gifs/5.gif";
 	}
 	websocket.send(
       JSON.stringify({

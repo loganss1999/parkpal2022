@@ -4,8 +4,6 @@ import (
  "net/http"
  "os"
  "io"
- "fmt"
- "encoding/json"
  "github.com/gorilla/websocket"
  "github.com/joho/godotenv"
  "github.com/go-redis/redis"
@@ -47,33 +45,37 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
 
  //send previous messages if there are any
    }
-  }
- }
-}
 
-func handleMessages() {
+func handleMessages(w http.ResponseWriter, r *http.Request) {
   //grab any next message from channel
   for client := range clients {
-  var msg Car
-  err := ws.ReadJSON(&msg)
-		if err != nil {
-			delete(clients, ws)
-			break
-		}
-  
-  if msg.carid == 1 {
-	
-   err := client.WriteJSON(ParkingSpace{x: 1000, y:1000, size:3})
-   if err != nil && unsafeError(err) {
-    log.Printf("error: %v", err)
-    client.Close()
-    delete(clients, client)
-  }
-  }
+	  var msg Car
+	  err := client.ReadJSON(&msg)
+			if err != nil {
+				delete(clients, ws)
+				break
+			}
+	  
+	  if msg.carid == 1 {
+		
+	   err := client.WriteJSON(ParkingSpace{x: 1000, y:1000, size:3})
+	   if err != nil && unsafeError(err) {
+		log.Printf("error: %v", err)
+		client.Close()
+		delete(clients, client)
+	  }
+	}
   //store message in redis
-  
-   }
   }
+  }
+
+func messageClient(client *websocket.Conn, msg Car) {
+	err := client.WriteJSON(msg)
+	if err != nil && unsafeError(err) {
+		log.Printf("error: %v", err)
+		client.Close()
+		delete(clients, client)
+	}
 }
 
 func main() {
